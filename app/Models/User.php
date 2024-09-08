@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use AshleyHindle\AiAutofill\AiAutofill;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use AiAutofill;
+
+    protected $autofill = [
+        'favourite_cheese' =>
+        'one word made from the letters in the user\'s name without reusing letters. Return the singular word only',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'favourite_cheese',
     ];
 
     /**
